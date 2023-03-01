@@ -1,5 +1,5 @@
 import 'package:fiverrr/constants/app_constants.dart';
-import 'package:fiverrr/screens/auth_screen.dart';
+import 'package:fiverrr/screens/auth/auth_screen.dart';
 import 'package:fiverrr/services/app_client.dart';
 import 'package:fiverrr/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
