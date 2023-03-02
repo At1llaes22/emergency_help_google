@@ -3,6 +3,9 @@ import 'package:fiverrr/services/temp_service.dart';
 import 'package:fiverrr/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/app_theme.dart';
+import 'widgets/auth_form.dart';
+
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
@@ -15,78 +18,21 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController passwordController = TextEditingController();
   bool isRegisterLoading = false;
   bool isLoginLoading = false;
+  bool isRegister = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text("Email"),
-                  TextField(
-                    controller: emailController,
-                  ),
-                  SizedBox(
-                    height: 36,
-                  ),
-                  Text("Password"),
-                  TextField(
-                    controller: passwordController,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  isLoginLoading
-                      ? const CircularProgressIndicator()
-                      : AppButton(
-                          onPressed: () async {
-                            setState(() {
-                              isLoginLoading = true;
-                            });
-                            print("Login clicekd");
-                            await AuthService.login(
-                                email: emailController.text,
-                                password: passwordController.text);
-                            setState(() {
-                              isLoginLoading = false;
-                            });
-                          },
-                          label: "Login",
-                        ),
-                  isRegisterLoading
-                      ? const CircularProgressIndicator()
-                      : AppButton(
-                          onPressed: () async {
-                            setState(() {
-                              isRegisterLoading = true;
-                            });
-                            print("Register clicekd");
-                            await AuthService.register(
-                                email: emailController.text,
-                                password: passwordController.text);
-                            setState(() {
-                              isRegisterLoading = false;
-                            });
-                          },
-                          label: "Register",
-                        ),
-                ],
-              ),
-              AppButton(
-                onPressed: () async {
-                  await TempService.temp();
-                },
-                label: "See groceries",
-              ),
-            ],
+          padding: const EdgeInsets.symmetric(vertical: 50.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [isRegister? : PhoneNumberAuthForm()],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:fiverrr/screens/auth/widgets/auth_button.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
@@ -6,12 +7,12 @@ import 'package:otp_text_field/style.dart';
 import '../../../constants/app_theme.dart';
 
 class OtpForm extends StatefulWidget {
-  final String email;
+  final String phoneNumber;
   final VoidCallback changeState;
   const OtpForm({
     Key? key,
     required this.changeState,
-    required this.email,
+    required this.phoneNumber,
   }) : super(key: key);
 
   @override
@@ -32,14 +33,6 @@ class _OtpFormState extends State<OtpForm> {
       children: [
         Column(
           children: [
-            Text(
-              "A 6 digit code has been sent to " + widget.email + ".",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 8,
-            ),
             OTPTextField(
               otpFieldStyle: OtpFieldStyle(
                   backgroundColor: AppColors.primary.withOpacity(0.5),
@@ -49,19 +42,19 @@ class _OtpFormState extends State<OtpForm> {
               fieldWidth: 48,
               controller: controller,
               spaceBetween: 0,
-              outlineBorderRadius: 12,
+              outlineBorderRadius: 5,
               fieldStyle: FieldStyle.box,
               keyboardType: TextInputType.number,
-              width: 300,
-              length: 6,
-              style: TextStyle(fontSize: 20),
+              width: 240,
+              length: 4,
+              style: const TextStyle(fontSize: 20),
               onCompleted: (pin) {
                 codeString = pin;
-                print("Changed: " + pin);
+                print("Changed: $pin");
               },
               onChanged: (pin) {
                 codeString = pin;
-                print("Changed: " + pin);
+                print("Changed: $pin");
               },
               textFieldAlignment: MainAxisAlignment.spaceAround,
             ),
@@ -77,10 +70,13 @@ class _OtpFormState extends State<OtpForm> {
                 : Container(),
           ],
         ),
+        SizedBox(
+          height: 80,
+        ),
         isLoading
             ? const CircularProgressIndicator()
             : AuthButton(
-                text: "Verify",
+                text: "Devam Et",
                 onClicked: () async {
                   if (validate()) {
                     setState(() {
@@ -89,7 +85,14 @@ class _OtpFormState extends State<OtpForm> {
                       validationError = null;
                     });
                   }
-                })
+                }),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "Kod Gelmedi mi?",
+          style: TextStyle(decoration: TextDecoration.underline, fontSize: 12),
+        )
       ],
     );
   }

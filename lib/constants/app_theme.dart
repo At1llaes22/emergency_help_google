@@ -4,16 +4,16 @@ class AppColors {
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff000000);
 
-  static const Color primary = Color(0xff765c45);
-  static const Color secondary = Color(0xfff7b500);
+  static const Color primary = Color(0xff545454);
+  static const Color secondary = Color(0xffffffff);
+  static const Color background = Color(0xff252525);
 
   static const Color iconColor = Color(0xff442f29);
 }
 
 class AppThemes {
   static final darkTheme = ThemeData(
-    textTheme:
-        getTextTheme(textColor: Colors.yellow, buttonColor: Colors.white),
+    textTheme: getTextTheme(textColor: Colors.white, buttonColor: Colors.white),
     fontFamily: "Poppins",
 
     /*scaffoldBackgroundColor: ProgramColors.gloneraDarkBackground,
@@ -48,7 +48,7 @@ class AppThemes {
 
   static final lightTheme = ThemeData(
     textTheme: getTextTheme(
-      textColor: Colors.black87,
+      textColor: Colors.white,
       buttonColor: Colors.white,
     ),
     fontFamily: "Poppins",

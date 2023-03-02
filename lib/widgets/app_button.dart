@@ -25,12 +25,12 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       //This material is necessary for blurry background panels
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(5),
       child: InkWell(
         onTap: disabled ? () {} : onPressed,
         child: Material(
           color: _getColor(context),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(5),
           child: Padding(
             padding: customPadding ??
                 EdgeInsets.symmetric(

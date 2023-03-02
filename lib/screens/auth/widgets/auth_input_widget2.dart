@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../../constants/app_theme.dart';
 
@@ -26,30 +27,34 @@ class NewAuthInputWidget extends StatefulWidget {
 class _NewAuthInputWidgetState extends State<NewAuthInputWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            //PHONE SELECTION
-            Container(
-              height: 46,
-              width: 0.8,
-            ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.text,
-                ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width - 180,
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //PHONE SELECTION
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.text,
+                  ),
+                  /*Container(
+                    width: 300,
                     child: TextField(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                       controller: widget.textController,
                       decoration: InputDecoration(
                         filled: true,
                         isDense: true,
-                        contentPadding: EdgeInsets.symmetric(vertical: 5),
+                        border: InputBorder.none,
+                        fillColor: Colors.deepPurpleAccent, //<-- SEE HERE
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide.none,
@@ -71,24 +76,39 @@ class _NewAuthInputWidgetState extends State<NewAuthInputWidget> {
                           borderSide: BorderSide.none,
                         ),
                       ),
-                    )),
-              ],
-            ),
-          ],
-        ),
-        Container(
-          height: 0.8,
-        ),
-        const SizedBox(height: 8),
-        widget.validationError != null || widget.serverError != null
-            ? Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.validationError ?? widget.serverError ?? "",
-                ),
-              )
-            : Container(),
-      ],
+                    ),
+                  ),*/
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 100,
+                    child: IntlPhoneField(
+                      controller: widget.textController,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(),
+                        ),
+                      ),
+                      initialCountryCode: 'TR',
+                      onChanged: (phone) {
+                        print(phone.completeNumber);
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  widget.validationError != null || widget.serverError != null
+                      ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            widget.validationError ?? widget.serverError ?? "",
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
